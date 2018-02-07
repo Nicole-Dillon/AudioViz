@@ -7,6 +7,7 @@ package audioviz;
 
 import java.io.File;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -77,6 +78,7 @@ public class PlayerController implements Initializable {
     private ArrayList<Visualizer> visualizers;
     private Visualizer currentVisualizer;
     private final Integer[] bandsList = {1, 2, 4, 8, 16, 20, 40, 60, 100, 120, 140};
+    private DecimalFormat decimalFormat = new DecimalFormat(".#");
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -165,8 +167,12 @@ public class PlayerController implements Initializable {
     
     private void handleReady() {
         Duration duration = mediaPlayer.getTotalDuration();
-        lengthText.setText(duration.toString());
-        Duration ct = mediaPlayer.getCurrentTime();
+        
+        //display one digit after decimal place
+        double ms = duration.toMillis();
+        lengthText.setText(decimalFormat.format(ms));
+        
+        Duration ct = mediaPlayer.getCurrentTime();        
         currentText.setText(ct.toString());
         currentVisualizer.start(numBands, vizPane);
         timeSlider.setMin(0);
@@ -182,7 +188,9 @@ public class PlayerController implements Initializable {
     private void handleUpdate(double timestamp, double duration, float[] magnitudes, float[] phases) {
         Duration ct = mediaPlayer.getCurrentTime();
         double ms = ct.toMillis();
-        currentText.setText(Double.toString(ms));
+        
+        //Displays one digit after decimal point
+        currentText.setText(decimalFormat.format(ms));
         timeSlider.setValue(ms);
         
         currentVisualizer.update(timestamp, duration, magnitudes, phases);
@@ -222,7 +230,9 @@ public class PlayerController implements Initializable {
     @FXML
     private void handleSlide(Event event) {
          if (mediaPlayer != null) {
+            
             mediaPlayer.seek(new Duration(timeSlider.getValue()));
+
             mediaPlayer.play();
         }  
     }
@@ -232,6 +242,8 @@ public class PlayerController implements Initializable {
            mediaPlayer.pause(); 
         }
     }
+    
+    
     
     
 }
