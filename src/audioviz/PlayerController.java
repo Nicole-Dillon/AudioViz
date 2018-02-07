@@ -218,4 +218,20 @@ public class PlayerController implements Initializable {
            mediaPlayer.stop(); 
         }
     }
+    
+    @FXML
+    private void handleSlide(Event event) {
+         if (mediaPlayer != null) {
+            mediaPlayer.seek(new Duration(timeSlider.getValue()));
+            mediaPlayer.play();
+        }  
+    }
+     @FXML
+    private void handleStartSlide(Event event) {
+        if (mediaPlayer != null) {
+           mediaPlayer.pause(); 
+        }
+    }
+    
+    
 }
