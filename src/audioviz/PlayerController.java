@@ -34,6 +34,9 @@ import javafx.util.Duration;
  * http://www.audiocheck.net/testtones_sinesweep20-20k.php
  * http://stackoverflow.com/questions/11994366/how-to-reference-primarystage
  * 
+ * Nicole Dillon
+ * nkdvgd
+ * 
  */
 public class PlayerController implements Initializable {
     
@@ -189,13 +192,12 @@ public class PlayerController implements Initializable {
     }
     
     private void handleUpdate(double timestamp, double duration, float[] magnitudes, float[] phases) {
-//        Duration ct = mediaPlayer.getCurrentTime();
         double ms = mediaPlayer.getCurrentTime().toMillis();
 
         //Displays one digit after decimal point
         currentText.setText(decimalFormat.format(ms));
         timeSlider.setValue(ms);
-        
+      
         currentVisualizer.update(timestamp, duration, magnitudes, phases);
     }
     
@@ -223,7 +225,6 @@ public class PlayerController implements Initializable {
             
             //Displays one digit after decimal point
            currentText.setText(decimalFormat.format(mediaPlayer.getCurrentTime().toMillis()));
-
         }
     }
     
@@ -238,6 +239,7 @@ public class PlayerController implements Initializable {
     private void handleSlide(Event event) {
          if (mediaPlayer != null) {
             
+            //skip to slider position
             mediaPlayer.seek(new Duration(timeSlider.getValue()));
             mediaPlayer.play();
         }  
@@ -248,8 +250,5 @@ public class PlayerController implements Initializable {
            mediaPlayer.pause(); 
         }
     }
-    
-    
-    
-    
+ 
 }

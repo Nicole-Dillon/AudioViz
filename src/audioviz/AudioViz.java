@@ -14,6 +14,9 @@ import javafx.stage.Stage;
 /**
  *
  * @author dale
+ * 
+ * Nicole Dillon
+ * nkdvgd
  */
 public class AudioViz extends Application {
     
