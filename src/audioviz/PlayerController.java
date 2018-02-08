@@ -33,6 +33,7 @@ import javafx.util.Duration;
  * Music: http://www.bensound.com/royalty-free-music
  * http://www.audiocheck.net/testtones_sinesweep20-20k.php
  * http://stackoverflow.com/questions/11994366/how-to-reference-primarystage
+ * 
  */
 public class PlayerController implements Initializable {
     
@@ -78,6 +79,8 @@ public class PlayerController implements Initializable {
     private ArrayList<Visualizer> visualizers;
     private Visualizer currentVisualizer;
     private final Integer[] bandsList = {1, 2, 4, 8, 16, 20, 40, 60, 100, 120, 140};
+    
+    //format to on decimal
     private final DecimalFormat decimalFormat = new DecimalFormat(".#");
     
     @Override
