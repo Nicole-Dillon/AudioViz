@@ -78,7 +78,7 @@ public class PlayerController implements Initializable {
     private ArrayList<Visualizer> visualizers;
     private Visualizer currentVisualizer;
     private final Integer[] bandsList = {1, 2, 4, 8, 16, 20, 40, 60, 100, 120, 140};
-    private DecimalFormat decimalFormat = new DecimalFormat(".#");
+    private final DecimalFormat decimalFormat = new DecimalFormat(".#");
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -186,9 +186,9 @@ public class PlayerController implements Initializable {
     }
     
     private void handleUpdate(double timestamp, double duration, float[] magnitudes, float[] phases) {
-        Duration ct = mediaPlayer.getCurrentTime();
-        double ms = ct.toMillis();
-        
+//        Duration ct = mediaPlayer.getCurrentTime();
+        double ms = mediaPlayer.getCurrentTime().toMillis();
+
         //Displays one digit after decimal point
         currentText.setText(decimalFormat.format(ms));
         timeSlider.setValue(ms);
@@ -217,6 +217,10 @@ public class PlayerController implements Initializable {
     private void handlePause(ActionEvent event) {
         if (mediaPlayer != null) {
            mediaPlayer.pause(); 
+            
+            //Displays one digit after decimal point
+           currentText.setText(decimalFormat.format(mediaPlayer.getCurrentTime().toMillis()));
+
         }
     }
     
@@ -232,7 +236,6 @@ public class PlayerController implements Initializable {
          if (mediaPlayer != null) {
             
             mediaPlayer.seek(new Duration(timeSlider.getValue()));
-
             mediaPlayer.play();
         }  
     }
